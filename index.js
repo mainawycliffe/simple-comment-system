@@ -1,9 +1,19 @@
-const express = require('express');
+import { engine } from 'express-handlebars';
+import { DateTime } from 'luxon';
 const app = express();
 const port = 3000;
 
+
+// register handlebars, and the views directory
+app.engine('handlebars', engine());
+app.set('view engine', 'handlebars');
+app.set('views', './views');
+
+// this loads the html content for simple comment system
 app.get('/', (req, res) => {
-  res.send('Hello World!');
+  res.render('index');
+});
+
 });
 
 app.post('/comment', (req, res) => {

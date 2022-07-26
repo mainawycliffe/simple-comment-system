@@ -1,9 +1,12 @@
 {
   "name": "simple-comment-system",
+  "type": "module",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.18.1"
+    "express": "^4.18.1",
+    "express-handlebars": "^6.0.6",
+    "luxon": "^3.0.1"
   }
 }
