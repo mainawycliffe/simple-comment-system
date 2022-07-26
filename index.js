@@ -1,6 +1,7 @@
 import express from 'express';
 import { engine } from 'express-handlebars';
 import { DateTime } from 'luxon';
+import bodyParser from 'body-parser';
 
 const app = express();
 const port = 3000;
@@ -42,6 +43,9 @@ app.set('views', './views');
 
 app.use(express.static('public'));
 
+// parse application/json
+app.use(bodyParser.json());
+
 // this loads the html content for simple comment system
 app.get('/', (req, res) => {
   res.render('index');
@@ -53,8 +57,21 @@ app.get('/comments', (req, res) => {
   });
 });
 
-app.post('/comment', (req, res) => {
-  // save comment
+app.post('/comments', (req, res) => {
+  const comment = req.body.comment;
+  if (!comment) {
+    res.status(400).end();
+    return;
+  }
+  const commentObj = {
+    name: 'John Doe',
+    photo: 'https://i.pravatar.cc/150?u=johndoe@example.com',
+    postedAt: DateTime.now().toISO(),
+    comment: comment,
+    upvotes: 1,
+  };
+  comments.push(commentObj);
+  res.status(200).json(commentObj).end();
 });
 
 app.listen(port, () => {

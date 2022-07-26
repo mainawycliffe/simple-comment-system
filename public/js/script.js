@@ -9,6 +9,22 @@ window.addEventListener('load', async () => {
   });
 });
 
+async function handleSubmit(event) {
+  event.preventDefault();
+  const comment = new FormData(event.target).get('comment').valueOf();
+  const res = await fetch('/comments', {
+    method: 'POST',
+    body: JSON.stringify({ comment: comment }),
+    headers: new Headers({ 'content-type': 'application/json' }),
+  });
+  if (!res.ok) {
+    alert('Error posting comment');
+    return;
+  }
+  const body = await res.json();
+  addComment(body);
+}
+
 function addComment(comment) {
   const now = luxon.DateTime.local();
   const commentELement = document.createElement('div');
@@ -20,7 +36,7 @@ function addComment(comment) {
       <div class='flex flex-col space-y-2 flex-1'>
         <div class='block'>
           <div class='inline-block text-lg font-bold'>${comment.name}</div>
-          <div class='inline-block text-gray-500 px-4'>&#8226;</div>
+          <div class='inline-block text-gray-500 px-1'>&#8226;</div>
           <div class='inline-block text-gray-500'>${luxon.DateTime.fromISO(comment.postedAt).toRelative()}</div>
         </div>
         <div class='block'>${comment.comment}</div>
