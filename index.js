@@ -40,6 +40,8 @@ app.engine('handlebars', engine());
 app.set('view engine', 'handlebars');
 app.set('views', './views');
 
+app.use(express.static('public'));
+
 // this loads the html content for simple comment system
 app.get('/', (req, res) => {
   res.render('index');
@@ -53,9 +55,6 @@ app.get('/comments', (req, res) => {
 
 app.post('/comment', (req, res) => {
   // save comment
-
-  // redirect back to the homepage after saving comment
-  res.redirect('/');
 });
 
 app.listen(port, () => {
