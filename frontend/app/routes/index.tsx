@@ -1,24 +1,20 @@
+import Comments from '~/components/Comments';
+import Search from '~/components/Search';
+
 export default function Index() {
   return (
-    <div style={{ fontFamily: 'system-ui, sans-serif', lineHeight: '1.4' }}>
-      <h1 className='text-9xl'>Welcome to Remix</h1>
-      <ul>
-        <li>
-          <a target='_blank' href='https://remix.run/tutorials/blog' rel='noreferrer'>
-            15m Quickstart Blog Tutorial
-          </a>
-        </li>
-        <li>
-          <a target='_blank' href='https://remix.run/tutorials/jokes' rel='noreferrer'>
-            Deep Dive Jokes App Tutorial
-          </a>
-        </li>
-        <li>
-          <a target='_blank' href='https://remix.run/docs' rel='noreferrer'>
-            Remix Docs
-          </a>
-        </li>
-      </ul>
+    <div className='h-screen w-screen mx-auto bg-gray-200'>
+      <div className='flex flex-col w-full md:w-[80rem] mx-auto p-5 space-y-8 divide-y divide-solid'>
+        <h3 className='text-3xl font-bold'>Discussion</h3>
+
+        <Search onAddComment={() => {}} />
+
+        <div className='flex flex-col w-full border-top border-gray-400'> </div>
+
+        <div id='comments' className='flex flex-col w-full space-y-8'></div>
+
+        <Comments />
+      </div>
     </div>
   );
 }
