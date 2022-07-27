@@ -2,7 +2,8 @@ import express from 'express';
 import { engine } from 'express-handlebars';
 import { DateTime } from 'luxon';
 import bodyParser from 'body-parser';
-import { getComments, initialComments, addComment } from './src/data/comments.js';
+// eslint-disable-next-line import/extensions
+import { getComments, addComment } from './src/data/comments.js';
 
 const app = express();
 const port = 3000;
@@ -29,7 +30,7 @@ app.get('/comments', (req, res) => {
 });
 
 app.post('/comments', (req, res) => {
-  const comment = req.body.comment;
+  const { comment } = req.body;
   if (!comment) {
     res.status(400).end();
     return;
@@ -38,7 +39,7 @@ app.post('/comments', (req, res) => {
     name: 'John Doe',
     photo: 'https://i.pravatar.cc/150?u=johndoe@example.com',
     postedAt: DateTime.now().toISO(),
-    comment: comment,
+    comment,
     upvotes: 1,
   };
   addComment(commentObj);

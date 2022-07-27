@@ -6,7 +6,7 @@ export const comments = [];
 export function initialComments() {
   const uid = new ShortUniqueId({ length: 10 });
 
-  const initialComments = [
+  const initialCommentList = [
     {
       id: uid(),
       name: 'John Doe',
@@ -24,7 +24,8 @@ export function initialComments() {
       name: 'Jane Doe',
       photo: 'https://i.pravatar.cc/150?u=janedoe@example.com',
       postedAt: DateTime.now().minus({ minute: 13 }).toISO(),
-      comment: `Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.`,
+      comment:
+        'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
       upvotes: 17,
     },
     {
@@ -32,12 +33,13 @@ export function initialComments() {
       name: 'Maina Wycliffe',
       photo: 'https://i.pravatar.cc/150?u=mainawycliffe@example.com',
       postedAt: DateTime.now().minus({ minute: 5 }).toISO(),
-      comment: `Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`,
+      comment:
+        'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
       upvotes: 5,
     },
   ];
 
-  comments.push(...initialComments);
+  comments.push(...initialCommentList);
 }
 
 export function getComments() {
