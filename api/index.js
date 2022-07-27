@@ -1,5 +1,4 @@
 import express from 'express';
-import { engine } from 'express-handlebars';
 import { DateTime } from 'luxon';
 import bodyParser from 'body-parser';
 // eslint-disable-next-line import/extensions
@@ -9,21 +8,10 @@ import cors from 'cors';
 const app = express();
 const port = 3001;
 
-// register handlebars, and the views directory
-app.engine('handlebars', engine());
-app.set('view engine', 'handlebars');
-app.set('views', './views');
-
 app.use(cors());
-app.use(express.static('public'));
 
 // parse application/json
 app.use(bodyParser.json());
-
-// this loads the html content for simple comment system
-app.get('/', (req, res) => {
-  res.render('index');
-});
 
 app.get('/comments', (req, res) => {
   res.json({
