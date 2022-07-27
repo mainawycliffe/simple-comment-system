@@ -23,6 +23,8 @@ async function handleSubmit(event) {
   }
   const body = await res.json();
   addComment(body);
+  // reset form
+  event.target.reset();
 }
 
 function addComment(comment) {
