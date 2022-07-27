@@ -4,15 +4,17 @@ import { DateTime } from 'luxon';
 import bodyParser from 'body-parser';
 // eslint-disable-next-line import/extensions
 import { getComments, addComment, upvoteComment } from './src/data/comments.js';
+import cors from 'cors';
 
 const app = express();
-const port = 3000;
+const port = 3001;
 
 // register handlebars, and the views directory
 app.engine('handlebars', engine());
 app.set('view engine', 'handlebars');
 app.set('views', './views');
 
+app.use(cors());
 app.use(express.static('public'));
 
 // parse application/json
