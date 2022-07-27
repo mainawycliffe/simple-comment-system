@@ -3,7 +3,7 @@ import { engine } from 'express-handlebars';
 import { DateTime } from 'luxon';
 import bodyParser from 'body-parser';
 // eslint-disable-next-line import/extensions
-import { getComments, addComment } from './src/data/comments.js';
+import { getComments, addComment, upvoteComment } from './src/data/comments.js';
 
 const app = express();
 const port = 3000;
@@ -37,6 +37,17 @@ app.post('/comments', (req, res) => {
   }
   const commentObject = addComment(comment);
   res.status(200).json(commentObject).end();
+});
+
+app.post('/comments/:commentID/upvote', (req, res) => {
+  const { commentID } = req.params;
+  console.log(commentID);
+  if (!commentID) {
+    res.status(400).end();
+    return;
+  }
+  const comment = upvoteComment(commentID);
+  res.status(200).json(comment).end();
 });
 
 app.listen(port, () => {

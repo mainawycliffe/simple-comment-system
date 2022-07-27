@@ -60,3 +60,12 @@ export function addComment(comment) {
   comments.push(commentObj);
   return commentObj;
 }
+
+export function upvoteComment(commentID) {
+  const comment = comments.find((comment) => comment.id === commentID);
+  if (!comment) {
+    return;
+  }
+  comment.upvotes += 1;
+  return comment;
+}
