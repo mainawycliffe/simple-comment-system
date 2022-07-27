@@ -50,5 +50,13 @@ export function getComments() {
 }
 
 export function addComment(comment) {
-  comments.push(comment);
+  const commentObj = {
+    name: 'John Doe',
+    photo: 'https://i.pravatar.cc/150?u=johndoe@example.com',
+    postedAt: DateTime.now().toISO(),
+    comment,
+    upvotes: 1,
+  };
+  comments.push(commentObj);
+  return commentObj;
 }

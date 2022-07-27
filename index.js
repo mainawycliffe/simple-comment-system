@@ -35,15 +35,8 @@ app.post('/comments', (req, res) => {
     res.status(400).end();
     return;
   }
-  const commentObj = {
-    name: 'John Doe',
-    photo: 'https://i.pravatar.cc/150?u=johndoe@example.com',
-    postedAt: DateTime.now().toISO(),
-    comment,
-    upvotes: 1,
-  };
-  addComment(commentObj);
-  res.status(200).json(commentObj).end();
+  const commentObject = addComment(comment);
+  res.status(200).json(commentObject).end();
 });
 
 app.listen(port, () => {
