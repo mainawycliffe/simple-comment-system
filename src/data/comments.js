@@ -23,7 +23,7 @@ export function initialComments() {
       id: uid(),
       name: 'Jane Doe',
       photo: 'https://i.pravatar.cc/150?u=janedoe@example.com',
-      postedAt: DateTime.now().minus({ minute: 13 }).toISO(),
+      postedAt: DateTime.now().minus({ hour: 3 }).toISO(),
       comment:
         'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
       upvotes: 17,
@@ -32,7 +32,7 @@ export function initialComments() {
       id: uid(),
       name: 'Maina Wycliffe',
       photo: 'https://i.pravatar.cc/150?u=mainawycliffe@example.com',
-      postedAt: DateTime.now().minus({ minute: 5 }).toISO(),
+      postedAt: DateTime.now().minus({ day: 5 }).toISO(),
       comment:
         'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
       upvotes: 5,
