@@ -8,7 +8,7 @@ type Props = {
   onAddComment?: () => void;
 };
 
-export default function Search({ onAddComment = () => {} }: Props) {
+export default function AddComment({ onAddComment = () => {} }: Props) {
   const {
     handleSubmit,
     register,
