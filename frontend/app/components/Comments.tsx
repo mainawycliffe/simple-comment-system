@@ -1,7 +1,11 @@
 import { useEffect, useState } from 'react';
 import { DateTime } from 'luxon';
 
-export default function Comments() {
+type Props = {
+  triggerCommentRefresh: number;
+};
+
+export default function Comments({ triggerCommentRefresh }: Props) {
   const [comments, setComments] = useState<Record<string, string>[]>([]);
 
   useEffect(() => {
@@ -16,7 +20,7 @@ export default function Comments() {
     }
 
     fetchComments();
-  }, []);
+  }, [triggerCommentRefresh]);
 
   return (
     <>
