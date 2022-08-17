@@ -1,3 +1,4 @@
+import { useLoaderData } from '@remix-run/react';
 import { useEffect, useState } from 'react';
 import type { CommentData } from './Comment';
 import Comment from './Comment';
@@ -9,10 +10,12 @@ type Props = {
 export default function Comments({ triggerCommentRefresh }: Props) {
   const [comments, setComments] = useState<CommentData[]>([]);
   const [onAddReplyTrigger, setOnAddReplyTrigger] = useState<number>(0);
+  const envVariables = useLoaderData();
+  console.log({ envVariables });
 
   useEffect(() => {
     async function fetchComments() {
-      const res = await fetch('http://localhost:3001/comments');
+      const res = await fetch(`${envVariables.BACKEND_URL}/comments`);
       if (!res.ok) {
         alert('Error fetching comments');
         return;

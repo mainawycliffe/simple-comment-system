@@ -1,6 +1,13 @@
 import Comments from '~/components/Comments';
 import AddComment from '~/components/AddComment';
 import { useState } from 'react';
+import { json } from '@remix-run/node';
+
+export async function loader() {
+  return json({
+    BACKEND_URL: process.env.BACKEND_URL,
+  });
+}
 
 export default function Index() {
   const [refreshComments, setRefreshComments] = useState<number>(0);

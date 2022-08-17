@@ -1,3 +1,4 @@
+import { useLoaderData } from '@remix-run/react';
 import { DateTime } from 'luxon';
 import { useState } from 'react';
 import AddComment from './AddComment';
@@ -21,9 +22,11 @@ type Props = {
 export default function Comment({ comment, isReply = false, onAddReplyTrigger }: Props) {
   const [upvotes, setUpvotes] = useState(comment.upvotes);
   const [showReplies, setShowReplies] = useState(false);
+  const envVariables = useLoaderData();
+  console.log({ envVariables });
 
   const upVote = async () => {
-    const res = await fetch(`http://localhost:3001/comments/${comment.id}/upvote`, {
+    const res = await fetch(`${envVariables.BACKEND_URL}/comments/${comment.id}/upvote`, {
       method: 'POST',
     });
     if (!res.ok) {

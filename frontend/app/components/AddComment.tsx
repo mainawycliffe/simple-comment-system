@@ -1,3 +1,4 @@
+import { useLoaderData } from '@remix-run/react';
 import { useForm } from 'react-hook-form';
 
 type FormData = {
@@ -23,8 +24,10 @@ export default function AddComment({ onAddComment = () => {}, replyForID }: Prop
     },
   });
 
+  const envVariables = useLoaderData();
+
   const onSubmit = async (data: FormData) => {
-    const res = await fetch('http://localhost:3001/comments', {
+    const res = await fetch(`${envVariables.BACKEND_URL}/comments`, {
       method: 'POST',
       body: JSON.stringify(data),
       headers: new Headers({ 'content-type': 'application/json' }),
