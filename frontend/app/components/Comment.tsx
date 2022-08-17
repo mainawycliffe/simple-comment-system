@@ -1,5 +1,6 @@
 import { DateTime } from 'luxon';
 import { useState } from 'react';
+import AddComment from './AddComment';
 
 export type CommentData = {
   id: string;
@@ -13,10 +14,13 @@ export type CommentData = {
 
 type Props = {
   comment: CommentData;
+  isReply?: boolean;
+  onAddReplyTrigger?: () => void;
 };
 
-export default function Comment({ comment }: Props) {
+export default function Comment({ comment, isReply = false, onAddReplyTrigger }: Props) {
   const [upvotes, setUpvotes] = useState(comment.upvotes);
+  const [showReplies, setShowReplies] = useState(false);
 
   const upVote = async () => {
     const res = await fetch(`http://localhost:3001/comments/${comment.id}/upvote`, {
@@ -53,9 +57,25 @@ export default function Comment({ comment }: Props) {
               </span>
               <span className='mr-4 inline-block hover:underline'>{upvotes} Upvote</span>
             </button>
+            {!isReply && (
+              <button onClick={() => setShowReplies(!showReplies)} type='button' className='inline-block'>
+                <span className='mr-4 inline-block hover:underline'>Reply</span>
+              </button>
+            )}
           </div>
         </div>
       </div>
+      {!isReply && showReplies && (
+        <div className='flex flex-col w-full px-14 space-y-8'>
+          <AddComment replyForID={comment.id} onAddComment={onAddReplyTrigger} />
+        </div>
+      )}
+      {comment.replies &&
+        comment.replies.map((reply) => (
+          <div key={reply.id} className='flex flex-col w-full px-14 space-y-8'>
+            <Comment comment={reply} isReply />
+          </div>
+        ))}
     </div>
   );
 }

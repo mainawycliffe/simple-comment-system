@@ -20,12 +20,12 @@ app.get('/comments', (req, res) => {
 });
 
 app.post('/comments', (req, res) => {
-  const { comment } = req.body;
+  const { comment, replyForID } = req.body;
   if (!comment) {
     res.status(400).end();
     return;
   }
-  const commentObject = addComment(comment);
+  const commentObject = addComment(comment, replyForID);
   res.status(200).json(commentObject).end();
 });
 
@@ -36,6 +36,10 @@ app.post('/comments/:commentID/upvote', (req, res) => {
     return;
   }
   const comment = upvoteComment(commentID);
+  if (!comment) {
+    res.status(404).end();
+    return;
+  }
   res.status(200).json(comment).end();
 });
 

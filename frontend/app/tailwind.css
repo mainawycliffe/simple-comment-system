@@ -701,6 +701,11 @@ video {
   padding-right: 0.25rem;
 }
 
+.px-14 {
+  padding-left: 3.5rem;
+  padding-right: 3.5rem;
+}
+
 .align-middle {
   vertical-align: middle;
 }

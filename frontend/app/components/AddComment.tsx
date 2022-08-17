@@ -2,13 +2,15 @@ import { useForm } from 'react-hook-form';
 
 type FormData = {
   comment: string;
+  replyForID?: string;
 };
 
 type Props = {
   onAddComment?: () => void;
+  replyForID?: string;
 };
 
-export default function AddComment({ onAddComment = () => {} }: Props) {
+export default function AddComment({ onAddComment = () => {}, replyForID }: Props) {
   const {
     handleSubmit,
     register,
@@ -16,6 +18,9 @@ export default function AddComment({ onAddComment = () => {} }: Props) {
     reset,
   } = useForm<FormData>({
     mode: 'onBlur',
+    defaultValues: {
+      replyForID,
+    },
   });
 
   const onSubmit = async (data: FormData) => {
@@ -29,7 +34,6 @@ export default function AddComment({ onAddComment = () => {} }: Props) {
       return;
     }
     reset();
-    alert('Comment posted successfully');
     onAddComment();
   };
 

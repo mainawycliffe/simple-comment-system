@@ -8,6 +8,7 @@ type Props = {
 
 export default function Comments({ triggerCommentRefresh }: Props) {
   const [comments, setComments] = useState<CommentData[]>([]);
+  const [onAddReplyTrigger, setOnAddReplyTrigger] = useState<number>(0);
 
   useEffect(() => {
     async function fetchComments() {
@@ -21,12 +22,16 @@ export default function Comments({ triggerCommentRefresh }: Props) {
     }
 
     fetchComments();
-  }, [triggerCommentRefresh]);
+  }, [triggerCommentRefresh, onAddReplyTrigger]);
 
   return (
     <>
       {comments.map((comment) => (
-        <Comment key={comment.id} comment={comment} />
+        <Comment
+          key={comment.id}
+          comment={comment}
+          onAddReplyTrigger={() => setOnAddReplyTrigger(onAddReplyTrigger + 1)}
+        />
       ))}
     </>
   );
