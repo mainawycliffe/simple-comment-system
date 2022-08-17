@@ -18,15 +18,17 @@ export function initialComments() {
           pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
           est laborum.`,
       upvotes: 15,
-    },
-    {
-      id: uid(),
-      name: 'Jane Doe',
-      photo: 'https://i.pravatar.cc/150?u=janedoe@example.com',
-      postedAt: DateTime.now().minus({ hour: 3 }).toISO(),
-      comment:
-        'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
-      upvotes: 17,
+      replies: [
+        {
+          id: uid(),
+          name: 'Jane Doe',
+          photo: 'https://i.pravatar.cc/150?u=janedoe@example.com',
+          postedAt: DateTime.now().minus({ hour: 3 }).toISO(),
+          comment:
+            'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
+          upvotes: 17,
+        },
+      ],
     },
     {
       id: uid(),
