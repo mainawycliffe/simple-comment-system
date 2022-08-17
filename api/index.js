@@ -31,7 +31,6 @@ app.post('/comments', (req, res) => {
 
 app.post('/comments/:commentID/upvote', (req, res) => {
   const { commentID } = req.params;
-  console.log(commentID);
   if (!commentID) {
     res.status(400).end();
     return;
