@@ -52,7 +52,9 @@ export function getComments() {
 }
 
 export function addComment(comment) {
+  const uid = new ShortUniqueId({ length: 10 });
   const commentObj = {
+    id: uid(),
     name: 'John Doe',
     photo: 'https://i.pravatar.cc/150?u=johndoe@example.com',
     postedAt: DateTime.now().toISO(),
