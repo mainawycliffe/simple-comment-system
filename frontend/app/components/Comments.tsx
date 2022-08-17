@@ -10,11 +10,13 @@ type Props = {
 export default function Comments({ triggerCommentRefresh }: Props) {
   const [comments, setComments] = useState<CommentData[]>([]);
   const [onAddReplyTrigger, setOnAddReplyTrigger] = useState<number>(0);
+  const [isLoading, setIsLoading] = useState(true);
+
   const envVariables = useLoaderData();
-  console.log({ envVariables });
 
   useEffect(() => {
     async function fetchComments() {
+      setIsLoading(true);
       const res = await fetch(`${envVariables.BACKEND_URL}/comments`);
       if (!res.ok) {
         alert('Error fetching comments');
@@ -22,20 +24,27 @@ export default function Comments({ triggerCommentRefresh }: Props) {
       }
       const comments = await res.json();
       setComments(comments.data);
+      setIsLoading(false);
     }
 
     fetchComments();
-  }, [triggerCommentRefresh, onAddReplyTrigger]);
+  }, [triggerCommentRefresh, onAddReplyTrigger, envVariables.BACKEND_URL]);
 
   return (
     <>
-      {comments.map((comment) => (
-        <Comment
-          key={comment.id}
-          comment={comment}
-          onAddReplyTrigger={() => setOnAddReplyTrigger(onAddReplyTrigger + 1)}
-        />
-      ))}
+      {isLoading ? (
+        <div className='text-2xl block text-center p-10 font-bold'>Loading comments...</div>
+      ) : (
+        <>
+          {comments.map((comment) => (
+            <Comment
+              key={comment.id}
+              comment={comment}
+              onAddReplyTrigger={() => setOnAddReplyTrigger(onAddReplyTrigger + 1)}
+            />
+          ))}
+        </>
+      )}
     </>
   );
 }
