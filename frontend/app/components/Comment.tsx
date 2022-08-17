@@ -31,7 +31,6 @@ export default function Comment({ comment, isReply = false, onAddReplyTrigger }:
       return;
     }
     const updatedComment = await res.json();
-    console.log(updatedComment);
     setUpvotes(updatedComment.upvotes);
   };
 
@@ -39,7 +38,7 @@ export default function Comment({ comment, isReply = false, onAddReplyTrigger }:
     <div className='flex flex-col w-full space-y-8'>
       <div className='flex flex-row space-x-4'>
         <div className='p-1'>
-          <img className='w-10 h-10 rounded-full' src={comment.photo} alt='avatar' />
+          <img className='w-10 h-10 rounded-full' src={comment.photo} alt={comment.name} />
         </div>
         <div className='flex flex-col space-y-2 flex-1'>
           <div className='block'>
