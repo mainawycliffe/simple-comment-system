@@ -13,6 +13,10 @@ app.use(cors());
 // parse application/json
 app.use(bodyParser.json());
 
+app.get('/', (req, res) => {
+  res.json({ message: 'Welcome!' }).send(200);
+});
+
 app.get('/comments', (req, res) => {
   res.json({
     data: getComments(),
